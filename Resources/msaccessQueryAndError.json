@@ -1,0 +1,87 @@
+[
+	{
+		"Query": "SELECT TOP 100 * FROM Students;",
+		"Errors": [
+			"TOP_KEYWORD_WITHOUT_ORDER_BY_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT Gender, MemberType, Count(MemberId) as memberCount from Member group by Gender;",
+		"Errors": [
+			"MISSING_COLUMN_IN_GROUP_BY_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT DISTINCT Member.*, Entry.TourId from Member, Entry;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_JOIN_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT Member.*, Entry.TourId from Member inner join Entry;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_JOIN_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT * from Member;;",
+		"Errors": [
+			"UNNECESSARY_SEMICOLON"
+		]
+	},
+	{
+		"Query": ";",
+		"Errors": [
+			"UNNECESSARY_SEMICOLON"
+		]
+	},
+	{
+		"Query": "SELECT * from Member where;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_WHERE_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT * FROM Ase WHERE ase_id = (SELECT TOP 1 ase_id FROM Magamine GROUP BY ase_id ORDER BY Count(*) DESC);",
+		"Errors": [
+			"TOP_KEYWORD_MIGHT_RETURN_MULTIPLE_ROWS"
+		]
+	},
+	{
+		"Query": "SELECT TOP 101 PERCENT * FROM Reserveerimine ORDER BY Something;",
+		"Errors": [
+			"TOP_LIMIT_PERCENT_CONSTRAINT"
+		]
+	},
+	{
+		"Query": "SELECT TOP 0 * FROM Reserveerimine ORDER BY Something;",
+		"Errors": [
+			"TOP_LIMIT_CONSTRAINT"
+		]
+	},
+	{
+		"Query": "SELECT TOP 5.5 * FROM Reserveerimine ORDER BY Something;",
+		"Errors": [
+			"POSSIBLE_NON_INTEGER_VALUE_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT count(*) as arv FROM (select distinct kommentaar from Reserveerimine);",
+		"Errors": [
+			"MISSING_ALIAS_IN_FROM_SUBQUERY"
+		]
+	},
+	{
+		"Query": "SELECT TOP 100 Count(*) AS arv FROM Hotell ORDER BY Something;",
+		"Errors": [
+			"ONE_ROW_IN_RESULT_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT * from Member where Gender = 'F' and where MemberType = 'Junior';",
+		"Errors": [
+			"MULTIPLE_WHERE_USED",
+			"MISSING_EXPRESSION_IN_WHERE_CLAUSE"
+		]
+	}
+]
