@@ -9,11 +9,11 @@ using System.Collections;
 
 namespace NppDB.MSAccess.Tests
 {
-    public class UnitTest1
+    public class MSAccessParserTest
     {
         private readonly ITestOutputHelper output;
 
-        public UnitTest1(ITestOutputHelper output)
+        public MSAccessParserTest(ITestOutputHelper output)
         {
             this.output = output;
         }
