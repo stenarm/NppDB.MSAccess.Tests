@@ -6,6 +6,7 @@ using Xunit.Abstractions;
 using System.Text.Json;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 namespace NppDB.MSAccess.Tests
 {
@@ -30,18 +31,19 @@ namespace NppDB.MSAccess.Tests
                     List<QueryAndErrors> queriesAndErrors = JsonSerializer.Deserialize<List<QueryAndErrors>>(jsonString);
                     foreach (var queryAndErrors in queriesAndErrors)
                     {
-                        output.WriteLine(queryAndErrors.Query);
+                        output.WriteLine(queryAndErrors.ToString());
                         Comm.ParserResult parserResult = executor.Parse(queryAndErrors.Query, new Comm.CaretPosition { Line = 0, Column = 0, Offset = 0 });
-                        List<Comm.ParserWarning> warnings = new List<Comm.ParserWarning>();
+                        List<String> warnings = new List<String>();
                         foreach (var command in parserResult.Commands)
                         {
-                            warnings.AddRange(command.Warnings);
+                            foreach (var warning in command.Warnings)
+                            {
+                                warnings.Add(warning.Type.ToString());
+                            }
                         }
-                        foreach (var error in queryAndErrors.Errors)
-                        {
-                            output.WriteLine(error);
-                            Assert.Contains(warnings, warning => warning.Type.ToString().Equals(error));
-                        }
+                        warnings = warnings.OrderBy(w => w).ToList();
+                        output.WriteLine("Errors present: " + String.Join(", ", warnings));
+                        Assert.True(warnings.SequenceEqual(queryAndErrors.Errors.OrderBy(e => e).ToList()));
                         output.WriteLine("");
                     }
                 }
