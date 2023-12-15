@@ -97,5 +97,15 @@
 	{
 		"Query": "SELECT * FROM Ruum WHERE ruumi_nr = ANY (SELECT TOP 1 ruumi_nr FROM Ruum GROUP BY ruumi_nr ORDER BY Count(*) DESC);",
 		"Errors": []
+	},
+	{
+		"Query": "SELECT * FROM Reserveerimine WHERE külalise_nr=2;",
+		"Errors": []
+	},
+	{
+		"Query": "SELECT TOP 'a' PERCENT * FROM Reserveerimine ORDER BY alguse_aeg;",
+		"Errors": [
+			"POSSIBLE_NON_INTEGER_VALUE_WITH_TOP"
+		]
 	}
 ]
