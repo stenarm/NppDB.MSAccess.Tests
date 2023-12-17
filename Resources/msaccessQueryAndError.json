@@ -42,7 +42,7 @@
 		]
 	},
 	{
-		"Query": "SELECT TOP 1 ruumi_nr FROM Ruum GROUP BY ruumi_nr ORDER BY Count(*) DESC",
+		"Query": "SELECT * FROM Hotell WHERE hotelli_nr = (SELECT TOP 1 hotelli_nr FROM ruum ORDER BY hotelli_nr);",
 		"Errors": [
 			"TOP_KEYWORD_MIGHT_RETURN_MULTIPLE_ROWS"
 		]
@@ -106,6 +106,18 @@
 		"Query": "SELECT TOP 'a' PERCENT * FROM Reserveerimine ORDER BY alguse_aeg;",
 		"Errors": [
 			"POSSIBLE_NON_INTEGER_VALUE_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT TOP 1 Count(hotelli_nr) AS arv FROM Reserveerimine ORDER BY hotelli_nr;",
+		"Errors": [
+			"ONE_ROW_IN_RESULT_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT hotelli_nr, Count(*) AS arv FROM Reserveerimine GROUP BY hotelli_nr HAVING count(*)>2 AND HAVING count(*)<10;",
+		"Errors": [
+			"MULTIPLE_HAVING_USED"
 		]
 	}
 ]
