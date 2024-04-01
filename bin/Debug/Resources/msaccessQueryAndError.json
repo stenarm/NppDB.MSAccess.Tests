@@ -1,0 +1,187 @@
+[
+	{
+		"Query": "SELECT TOP 100 * FROM Hotell;",
+		"Errors": [
+			"TOP_KEYWORD_WITHOUT_ORDER_BY_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT ruumi_tuup, hind, Count(hotelli_nr) as hotellCount from Ruum group by hind;",
+		"Errors": [
+			"MISSING_COLUMN_IN_GROUP_BY_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT DISTINCT Hotell.*, Ruum.ruumi_nr from Hotell, Ruum;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_JOIN_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT DISTINCT Hotell.*, Ruum.ruumi_nr FROM Hotell INNER JOIN Ruum;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_JOIN_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT * from Hotell;;",
+		"Errors": [
+			"UNNECESSARY_SEMICOLON"
+		]
+	},
+	{
+		"Query": ";",
+		"Errors": [
+			"UNNECESSARY_SEMICOLON"
+		]
+	},
+	{
+		"Query": "SELECT * from Hotell where;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_WHERE_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT * FROM Hotell WHERE hotelli_nr = (SELECT TOP 1 hotelli_nr FROM ruum ORDER BY hotelli_nr);",
+		"Errors": [
+			"TOP_KEYWORD_MIGHT_RETURN_MULTIPLE_ROWS"
+		]
+	},
+	{
+		"Query": "SELECT TOP 101 PERCENT * FROM Reserveerimine ORDER BY hotelli_nr;",
+		"Errors": [
+			"TOP_LIMIT_PERCENT_CONSTRAINT"
+		]
+	},
+	{
+		"Query": "SELECT TOP 0 * FROM Reserveerimine ORDER BY hotelli_nr;",
+		"Errors": [
+			"TOP_LIMIT_CONSTRAINT"
+		]
+	},
+	{
+		"Query": "SELECT TOP 5.5 * FROM Reserveerimine ORDER BY hotelli_nr;",
+		"Errors": [
+			"POSSIBLE_NON_INTEGER_VALUE_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT count(*) AS arv FROM (SELECT DISTINCT kommentaar FROM Reserveerimine);",
+		"Errors": [
+			"MISSING_ALIAS_IN_FROM_SUBQUERY"
+		]
+	},
+	{
+		"Query": "SELECT TOP 100 Count(*) AS arv FROM Hotell ORDER BY hotelli_nr;",
+		"Errors": [
+			"ONE_ROW_IN_RESULT_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT * from Hotell where nimi = 'Viru' and where linn = 'Tallinn';",
+		"Errors": [
+			"MULTIPLE_WHERE_USED",
+			"MISSING_EXPRESSION_IN_WHERE_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT * FROM Ruum WHERE ruumi_nr = (SELECT TOP 1 ruumi_nr FROM Ruum GROUP BY ruumi_nr ORDER BY Count(*) DESC);",
+		"Errors": [
+			"TOP_KEYWORD_MIGHT_RETURN_MULTIPLE_ROWS"
+		]
+	},
+	{
+		"Query": "SELECT * FROM Ruum WHERE ruumi_nr IN (SELECT TOP 1 ruumi_nr FROM Ruum GROUP BY ruumi_nr ORDER BY Count(*) DESC);",
+		"Errors": []
+	},
+	{
+		"Query": "SELECT * FROM Ruum WHERE ruumi_nr = ANY (SELECT TOP 1 ruumi_nr FROM Ruum GROUP BY ruumi_nr ORDER BY Count(*) DESC);",
+		"Errors": []
+	},
+	{
+		"Query": "SELECT * FROM Reserveerimine WHERE külalise_nr=2;",
+		"Errors": []
+	},
+	{
+		"Query": "SELECT TOP 'a' PERCENT * FROM Reserveerimine ORDER BY alguse_aeg;",
+		"Errors": [
+			"POSSIBLE_NON_INTEGER_VALUE_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT TOP 1 Count(hotelli_nr) AS arv FROM Reserveerimine ORDER BY hotelli_nr;",
+		"Errors": [
+			"ONE_ROW_IN_RESULT_WITH_TOP"
+		]
+	},
+	{
+		"Query": "SELECT hotelli_nr, Count(*) AS arv FROM Reserveerimine GROUP BY hotelli_nr HAVING count(*)>2 AND HAVING count(*)<10;",
+		"Errors": [
+			"MULTIPLE_HAVING_USED"
+		]
+	},
+	{
+		"Query": "SELECT Hotell.hotelli_nr, r.ruumi_nr FROM Reserveerimine r, Hotell, Külaline WHERE Külaline.külalise_nr=r.külalise_nr;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_JOIN_CLAUSE"
+		]
+	},
+	{
+		"Query": "DELETE FROM Hotell WHERE;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_WHERE_CLAUSE"
+		]
+	},
+	{
+		"Query": "UPDATE Hotell SET nimi=nimi WHERE;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_WHERE_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT * FROM Hotell WHERE hotelli_nr IN (SELECT hotelli_nr FROM Hotell GROUP BY hotelli_nr HAVING);",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_HAVING_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT ruumi_tüüp INTO X FROM Ruum GROUP BY ruumi_tüüp HAVING;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_HAVING_CLAUSE"
+		]
+	},
+	{
+		"Query": "SELECT TOP 101 PERCENT * INTO X FROM Reserveerimine ORDER BY hotelli_nr;",
+		"Errors": [
+			"TOP_LIMIT_PERCENT_CONSTRAINT"
+		]
+	},
+	{
+		"Query": "SELECT Hotell.hotelli_nr FROM Reserveerimine RIGHT JOIN Hotell ON Hotell.hotelli_nr=Reserveerimine.hotelli_nr GROUP BY Hotell.hotelli_nr HAVING Count(*)>2;",
+		"Errors": [
+			"COUNT_FUNCTION_WITH_OUTER_JOIN"
+		]
+	},
+	{
+		"Query": "SELECT ruumi_tüüp, hind FROM ruum GROUP BY ruumi_tüüp HAVING hind > 10;",
+		"Errors": [
+			"HAVING_CLAUSE_WITHOUT_AGGREGATE_FUNCTION"
+		]
+	},
+	{
+		"Query": "SELECT ruumi_tüüp, hind FROM ruum GROUP BY ruumi_tüüp, hind HAVING hind > 10;",
+		"Errors": [
+		]
+	},
+	{
+		"Query": "SELECT ruumi_tüüp FROM Ruum GROUP BY ruumi_tüüp HAVING ORDER BY ruumi_tüüp;",
+		"Errors": [
+			"MISSING_EXPRESSION_IN_HAVING_CLAUSE"
+		]
+	},
+	{
+		"Query": "DELETE FROM Hotell WHERE hotelli_nr IN ( SELECT TOP 1 hotelli_nr FROM Reserveerimine ORDER BY hotelli_nr );",
+		"Errors": [
+		]
+	}
+]
