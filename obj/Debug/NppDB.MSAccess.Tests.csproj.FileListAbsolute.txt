@@ -98,3 +98,5 @@ C:\Users\Andres\Documents\bcS\NppDB\NppDB.MSAccess.Tests\obj\Debug\NppDB.MSAcces
 C:\Users\Andres\Documents\bcS\NppDB\NppDB.MSAccess.Tests\obj\Debug\NppDB.MSAccess.Tests.csproj.CopyComplete
 C:\Users\Andres\Documents\bcS\NppDB\NppDB.MSAccess.Tests\obj\Debug\NppDB.MSAccess.Tests.dll
 C:\Users\Andres\Documents\bcS\NppDB\NppDB.MSAccess.Tests\obj\Debug\NppDB.MSAccess.Tests.pdb
+C:\Users\stena\RiderProjects\NppDB\NppDB.MSAccess.Tests\obj\Debug\NppDB.MSAccess.Tests.dll
+C:\Users\stena\RiderProjects\NppDB\NppDB.MSAccess.Tests\obj\Debug\NppDB.MSAccess.Tests.pdb
