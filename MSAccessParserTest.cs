@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestPlatform.Utilities;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System;
+using System.Linq;
+using System.Text.Json;
+using NppDB.Comm;
 using Xunit;
 using Xunit.Abstractions;
-using System.Text.Json;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
 
 namespace NppDB.MSAccess.Tests
 {
@@ -32,7 +31,7 @@ namespace NppDB.MSAccess.Tests
                     foreach (var queryAndErrors in queriesAndErrors)
                     {
                         output.WriteLine(queryAndErrors.ToString());
-                        Comm.ParserResult parserResult = executor.Parse(queryAndErrors.Query, new Comm.CaretPosition { Line = 0, Column = 0, Offset = 0 });
+                        ParserResult parserResult = executor.Parse(queryAndErrors.Query, new CaretPosition { Line = 0, Column = 0, Offset = 0 });
                         List<String> warnings = new List<String>();
                         foreach (var command in parserResult.Commands)
                         {
