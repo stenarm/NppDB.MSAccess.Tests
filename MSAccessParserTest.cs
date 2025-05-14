@@ -21,7 +21,7 @@ namespace NppDB.MSAccess.Tests
         [Fact]
         public void TestQueriesGetCorrectWarnings()
         {
-            MSAccessExecutor executor = new MSAccessExecutor(null);
+            MsAccessExecutor executor = new MsAccessExecutor(null);
             using (var sr = new StreamReader("Resources/msaccessQueryAndError.json"))
             {
                 String jsonString;
